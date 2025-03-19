@@ -1,0 +1,14 @@
+- Strict Mode
+- Rendering root component the old way.
+- Creating components
+- Whole app in one single file.
+- Styling react components and apps.
+- Passing and receiving props.
+- Rules of JSX.
+- Rendering lists (key property is important)
+- Conditional Rendering with &&
+- Conditional rendering with ternary (a ? b : c)
+- Conditional rendering with multiple returns.
+- Destructuring props
+- React.Fragment - to not contain any parent element but to make multiple elements render side by side.
+- Conditional setting of classNames.
