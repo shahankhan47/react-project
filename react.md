@@ -74,5 +74,11 @@ Props:
 State:
 
 - internal data that can be updated by the component's logic.
+- is the data that component holds over time. necessary for information that it needs to remember throughout app life cycle.
+- can be looked as a component's memory.
+- state variable / piece of state - A single variable in a component.
+- Updating a state triggers react to re-render the component.
+- Allows developers to persist local variable between renders.
+- For data that should not trigger component re-render, do not use state.
 
 ====================================================================================================================================

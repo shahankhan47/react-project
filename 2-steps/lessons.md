@@ -1,0 +1,5 @@
+- React re-renders when state is updated.
+- Setting and manipulating a state.
+- How not to (bad practice) set/update a state.
+- React developer tools
+- Changing a state based on it's current state.

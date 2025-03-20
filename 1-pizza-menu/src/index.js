@@ -45,6 +45,13 @@ const pizzaData = [
     photoName: "pizzas/prosciutto.jpg",
     soldOut: false,
   },
+  {
+    name: "Pizza Shahan's Special",
+    ingredients: "Tomato, mozarella, and halal meat",
+    price: 24,
+    photoName: "pizzas/pizza-pollo-arrostojpg.jpg",
+    soldOut: false,
+  },
 ];
 
 function App() {
