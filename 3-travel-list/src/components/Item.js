@@ -1,10 +1,6 @@
-function Item({ item, setItems }) {
-    function onClick(e) {
-        setItems((items) => {
-            const index = items?.indexOf(item);
-            items[index]["packed"] = true;
-            return [...items];
-        });
+function Item({ item, onPacked }) {
+    function packItem(item) {
+        onPacked(item);
     }
 
     return (
@@ -14,7 +10,7 @@ function Item({ item, setItems }) {
             >
                 {item?.quantity} {item?.description}
             </span>
-            <button onClick={(e) => onClick(e)}>X</button>
+            <button onClick={(e) => packItem(item?.id)}>X</button>
         </li>
     );
 }

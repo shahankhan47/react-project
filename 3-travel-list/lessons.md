@@ -2,3 +2,6 @@
 -   preventDefault - to prevent page loading when a button is clicked.
 -   difference between onClick for a button and onSubmit for a form is that for a button you cannot triiger event by pressing Enter but when you type a form you can submit it by pressing Enter.
 -   Controlled elements - input elements of an input, button, form, etc that is completely in sync with the state.
+-   Thinking in react. (See thinking-in-react.md file)
+-   Update state of a parent component from a child component.
+-   Lifting state up - to update state of a sibling component, lift the state up to make the closest common parent have the state defined and pass it down to both the siblings (one using it and the other one updating it).

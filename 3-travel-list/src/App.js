@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Logo from "./components/Logo";
 import Form from "./components/Form";
@@ -23,12 +22,37 @@ const initialItems = [
 function App() {
     const [items, setItems] = useState(initialItems);
 
+    function handleAddItems(newItem) {
+        setItems((items) => [...items, newItem]);
+    }
+
+    function onPacked(id) {
+        // Below is incorrect way to update a state containing array of objects.
+        // This is mutable way and react does not prefer to mutate objects
+        // setItems((items) => {
+        //     const index = items?.indexOf(item);
+        //     items[index]["packed"] = true;
+        //     return [...items];
+        // });
+
+        // Instead do this
+        setItems((items) => {
+            return items?.map((item) =>
+                item?.id === id ? { ...item, packed: true } : item
+            );
+        });
+    }
+
     return (
         <div className="App">
             <Logo />
-            <Form setItems={setItems} />
-            <PackagingList initialItems={items} setItems={setItems} />
-            <Stats />
+            {/* Incorrect way is to send the setItems setter directly to the child component.
+                Correct way is to create a new method handleAddItems to handle the change in state
+                and pass that method down to the child component
+             */}
+            <Form onAddItems={handleAddItems} />
+            <PackagingList initialItems={items} onPacked={onPacked} />
+            <Stats items={items} />
         </div>
     );
 }

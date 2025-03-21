@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Form({ setItems }) {
+function Form({ onAddItems }) {
     const [description, setDescription] = useState("");
     const [quantity, setQuantity] = useState(1);
 
@@ -18,7 +18,7 @@ function Form({ setItems }) {
             quantity,
             packed: false,
         };
-        setItems((items) => [...items, newItem]);
+        onAddItems(newItem);
 
         // Controlled elements - setting back to default by updating just the state
         setDescription("");
