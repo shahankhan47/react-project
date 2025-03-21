@@ -82,3 +82,7 @@ State:
 -   For data that should not trigger component re-render, do not use state.
 
 =======================================================================================================================
+The children prop:
+
+-   Very important and useful prop to pass JSX down to children components.
+-   Essential tool to make reusable and configurable components
