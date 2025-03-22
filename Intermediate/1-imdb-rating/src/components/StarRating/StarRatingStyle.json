@@ -1,0 +1,20 @@
+{
+    "containerStyle": {
+        "display": "flex",
+        "alignItems": "center",
+        "gap": "16px"
+    },
+    "starContainerStyle": {
+        "display": "flex"
+    },
+    "textStyle": {
+        "lineHeight": "1",
+        "margin": "0"
+    },
+    "starStyle": {
+        "width": "48px",
+        "height": "48px",
+        "display": "block",
+        "cursor": "pointer"
+    }
+}

@@ -86,3 +86,58 @@ The children prop:
 
 -   Very important and useful prop to pass JSX down to children components.
 -   Essential tool to make reusable and configurable components
+
+=======================================================================================================================
+How to split UI into components
+
+-   Component size matters:
+    -   Size is Huge:
+        -   Too many responsibilities for one component.
+        -   Might need too many props
+        -   Hard to reuse
+        -   Complex code, hard to understand
+    -   Size is too small:
+        -   Ending up with 100s of mini-components.
+        -   Confusing codebase.
+        -   Too abstracted.
+-   Goal is to get the balance between the component being too specific (too small) and too broad (huge).
+-   Ideal size should be:
+    The questions below are all when you might want to use a new component (split the component into multiple)
+
+    -   Logical separation (of content or layout of UI):
+        -   Does the component has pieces of content/layout that does not belong together?
+    -   Some or all components can be reusable:
+        -   Is it possible to reuse part of the component?
+        -   Do you want or need to reuse it?
+    -   Each should have well defined responsibilities:
+        -   Is the component doing too many things?
+        -   Does the component rely on too many props?
+        -   Does the component has too many states/effects?
+        -   Code (including JSX) is too confusing?
+    -   Shouldn't be overly complex
+
+-   Personal coding style also matters (to what you should use - small/huge/ideal size).
+-   When in doubt, start with a bigger component and separate it into smaller components as needed.
+
+General Guidelines:
+
+-   Creating new components, comes with abstractions which comes with more mental energy.
+-   Name a component acc to what it does or what it displays.
+-   Never declare a component inside another.
+-   Co-locate related components inside same file.
+
+=======================================================================================================================
+Component Categories:
+
+-   Most components will naturally fall into one of 3 categories:
+    -   Stateless / Presentational
+        -   No state
+        -   Can receive props only to display
+        -   USually small and reusable
+    -   Stateful
+        -   Have state
+        -   Can still be reusable
+    -   Structural
+        -   Pages, layouts or screens
+        -   Result of composition
+        -   Can be huge and non-reusable
