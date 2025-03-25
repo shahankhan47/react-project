@@ -7,9 +7,9 @@ export type MovieProp = {
     Title: string;
     Year: string;
     Poster: string;
-    runtime?: number;
-    imdbRating?: number;
-    userRating?: number;
+    runtime?: string;
+    imdbRating?: string;
+    userRating?: string;
 };
 
 export type NumResultsProps = {
@@ -21,4 +21,22 @@ export type DisplayProps = {
     avgImdbRating: string;
     avgUserRating: string;
     avgRuntime: number;
+};
+
+export type SearchBarProps = {
+    query: string;
+    setQuery: Function;
+};
+
+export type SelectedMovieProp = {
+    Title: string;
+    Year: string;
+    Poster: string;
+    Runtime: string;
+    imdbRating: string;
+    Plot: string;
+    Released: string;
+    Actors: string;
+    Director: string;
+    Genre: string;
 };

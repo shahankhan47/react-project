@@ -1,3 +1,6 @@
+=======================================================================================================================
+PROPS
+=======================================================================================================================
 Prop drilling:
 
     When we need to use a prop in a child component which is nested far too deep from the parent component,
@@ -31,3 +34,83 @@ Creating isolated reusable components - StarRating
 -   keep the abstraction necessary for the component.
 -   Too many props will make the component difficult to use and expose too much complexity.
 -   Too little props make component not flexible enough and might make it not very useful.
+
+=======================================================================================================================
+EFFECTS AND DATA FETCHING
+=======================================================================================================================
+Component Lifecycle:
+
+1. Initial Render / Mount:
+
+    - Component instance is rendered for the first time.
+    - Fresh state and props are created.
+
+2. Re-Rendering of a component (Optional):
+
+    - It can be rendered unlimited number of times.
+    - Happens when:
+        - State changes
+        - Props change
+        - Parent re-renders
+        - Context changes
+
+3. Unmount:
+    - Component dies, destroyed and removed from screen.
+    - State and props are destroyed.
+
+How not to fetch data in react application:
+
+-   Fetching or calling an http request inside the component (render logic) and updating a state with the fetched data.
+    -   This will make react call the http request infinite amount of times and it will keep on fetching and updating the state.
+    -   This will happen because it will immediately cause the component to re-render and the fetch request gets hit again, which will set the state again, which will re-render again, which will update state again, ... and so on.
+
+How to fetch data:
+
+-   Use hooks like useEffect, etc.
+
+Side Effects:
+
+-   An interaction between a React component and the world outside the component.
+-   Code that actually does something e.g. data fetching, setting subscriptions, setting timers, manually accessing DOM.
+-   Side effects should not be in render logic but in:
+    -   Event handlers - when a specific event is triggered.
+    -   Effects (useEffect, etc) - after a component mounts or re-renders.
+        -   Effects allow us to write code that will run at different moments (mount, re-render, unmount)
+        -   Used to keep a component in sync with some external system.
+        -   We should not overuse this.
+        -   Effects are synchronous so never use async inside a useEffect. If you want to use asynch, create another function inside it.
+        -   Every state and prop used inside a useEffect should be included in the dependency array - otherwise a bug called stale closure will occur.
+
+Loading State and Loading Indicator.
+Handling errors and no internet connection fail safe.
+useEffect hook runs after the browser paint on initial render.
+useLayoutEffect runs before the browser paint - highly discouraged to use.
+
+Cleanup functions:
+
+-   Function that we can return from an effect (optional).
+-   Runs on 2 occasions:
+    -   Before the effect is executed again
+    -   After a component has unmounted.
+-   Potential Uses:
+    -   HTTP Request -> Cancel request
+    -   API Subscription -> Cancel Subscription
+    -   Start timer -> Stop timer
+    -   Add event listener -> Remove listener
+
+Race Condition Problems:
+
+-   Race condition is when there is a lot of network requests (api calls) happening in your app.
+-   In our example, it happens when we type in searchbar for a movie name:
+    -   with each letter then api call is made which is:
+        -   inefficient
+        -   can have race condition.
+    -   Race condition means that all the api calls are racing to be completed.
+    -   If say, when we type half a movie name e.g. incept and this request takes very very long time.
+        Even longer than the complete movie name e.g. inception, then the response with one with name "incept" will
+        be stored in the state.
+-   To prevent this for http fetch, we can write cleanup functions for data fetching.
+
+Global Keypress Event:
+
+-

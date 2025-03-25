@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { SearchBarProps } from "../../types";
 
-export default function SearchBar() {
-    const [query, setQuery] = useState("");
-
+export default function SearchBar({ query, setQuery }: SearchBarProps) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setQuery(e.target.value);
+    }
     return (
         <input
             className="search"
             type="text"
             placeholder="Search movies..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleChange}
         />
     );
 }
