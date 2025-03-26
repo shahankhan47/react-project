@@ -9,7 +9,8 @@ export type MovieProp = {
     Poster: string;
     runtime?: string;
     imdbRating?: string;
-    userRating?: string;
+    userRating?: string | null;
+    __countRatingDecisions?: number;
 };
 
 export type NumResultsProps = {
@@ -24,7 +25,7 @@ export type DisplayProps = {
 };
 
 export type SearchBarProps = {
-    query: string;
+    query: string | null;
     setQuery: Function;
 };
 

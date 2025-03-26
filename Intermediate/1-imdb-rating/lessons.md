@@ -114,3 +114,64 @@ Race Condition Problems:
 Global Keypress Event:
 
 -
+
+=======================================================================================================================
+REACT HOOKS
+=======================================================================================================================
+Special built-in functions that allow us to "hook" into React internals:
+
+    - creating/accessing state from fibre tree.
+    - registering side effects in fibre tree.
+    - Manual DOM selections - Many more
+
+Always starts with "use"
+Enable easy reusing of non-visual logic - we can compose multiple hooks into our own custom hook.
+Give functional components the ability to own state and run side effects at different lifecycle points
+
+Examples:
+
+-   useState
+-   useEffect
+-   useReducer
+-   useContext
+-   useRef
+-   useCallback
+-   useMemo
+-   useTransition
+-   many more
+
+Rules of Hooks:
+
+-   Can only be called at the top level.
+    -   Do not call them inside conditionals, loops, or after an early return.
+    -   This is necessary to ensure they are all called in the same order.
+    -   The reason is because internally react maintains a linked-list of hooks and they are called in the same order everytime there's a re-render. So calling a hook in a conditional/loop/etc would break the linked-list.
+-   Only call hooks from React functions (functional components)
+
+The useRef Hook:
+
+-   Box (object) with a mutable .current property that is persisted across renders (normal variables are always reset).
+-   2 Big use cases:
+    -   Creating a variable that stays the same between renders (prev state, setTimeout, etc)
+    -   Selecting and storing/preserving DOM elements
+-   Refs are for data that is not in the visual output of the component.
+-   Usually only appear in event handlers or effects but not in JSX.
+-   Do not read/write the .current property in render logic.
+
+Refs | State
+
+Persists Across Renders | Persists Across Renders
+Updating does not cause re-render | Updating causes re-render
+Mutable | Immutable
+Synchronous Updates | Asynchronous Updates
+
+Custom Hooks:
+
+-   Does logic that I want to use contain any hooks?
+    -   No - use regular functions
+    -   Yes - use custom hook.
+-   Allows us to reuse non-visual logic in multiple components
+-   One custom hook should have only one purpose - to make it reusable and portable (even across multiple projects)
+-   Rules of hooks apply to custom hooks too.
+-   Unlike components, can receive and return any relevant data.
+-   Need to use one or more react hooks.

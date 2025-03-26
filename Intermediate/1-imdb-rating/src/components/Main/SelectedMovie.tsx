@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MovieProp, SelectedMovieProp } from "../../types";
 import StarRating from "../StarRating/StarRating";
 import Loader from "../Loader";
+import { useKey } from "../../hooks/useKey";
 
 const KEY = "254f3c70";
 const URL = `http://www.omdbapi.com/?apikey=${KEY}&`;
+
+//This will work same as useRef but not recommended because here you are setting a global variable.
+let countOutsideComponent = 0;
 
 export default function SelectedMovie({
     id,
@@ -18,7 +22,7 @@ export default function SelectedMovie({
     watched: MovieProp[];
 }) {
     const [isLoading, setIsloading] = useState(false);
-    const [userRating, setUserRating] = useState("");
+    const [userRating, setUserRating] = useState(null);
     const [movie, setMovie] = useState<SelectedMovieProp>({
         Title: "",
         Year: "",
@@ -31,6 +35,20 @@ export default function SelectedMovie({
         Director: "",
         Genre: "",
     });
+
+    //Using useRef to count no of times user clicks on any rating without triggering a re-render:
+    const countRef = useRef(0);
+    // Using variable won't work:
+    let count = 0;
+
+    useEffect(() => {
+        if (userRating) {
+            countRef.current = countRef.current + 1;
+            count++;
+            countOutsideComponent++;
+            console.log(count, countRef.current, countOutsideComponent);
+        }
+    }, [userRating, count]);
 
     useEffect(() => {
         if (!movie?.Title) {
@@ -58,6 +76,8 @@ export default function SelectedMovie({
             runtime: movie.Runtime,
             imdbRating: movie.imdbRating,
             userRating,
+            //using useRef to update this. __ in name because this is to be used internally.
+            __countRatingDecisions: countRef.current,
         };
         onAddWatched(newMovie);
         onCloseMovie();
@@ -75,20 +95,23 @@ export default function SelectedMovie({
         getMovieDetails(id);
     }, [id]);
 
-    useEffect(() => {
-        const keyPressCallback = (e: KeyboardEvent) => {
-            if (e.code === "Escape") {
-                onCloseMovie();
-            }
-        };
-        document.addEventListener("keydown", keyPressCallback);
+    // Commented code because it is moved to cutom hook - useKey
+    // useEffect(() => {
+    //     const keyPressCallback = (e: KeyboardEvent) => {
+    //         if (e.code === "Escape") {
+    //             onCloseMovie();
+    //         }
+    //     };
+    //     document.addEventListener("keydown", keyPressCallback);
 
-        // Cleanup is very important when you add an eventListener to a component because if you won't
-        // Eveytime the component instance is mouted, it will create a new same eventListener.
-        return function () {
-            document.removeEventListener("keydown", keyPressCallback);
-        };
-    }, [onCloseMovie]);
+    //     // Cleanup is very important when you add an eventListener to a component because if you won't
+    //     // Eveytime the component instance is mouted, it will create a new same eventListener.
+    //     return function () {
+    //         document.removeEventListener("keydown", keyPressCallback);
+    //     };
+    // }, [onCloseMovie]);
+    useKey("Escape", onCloseMovie);
+
     return (
         <div className="details">
             {isLoading ? (

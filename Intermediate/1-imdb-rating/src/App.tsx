@@ -13,20 +13,24 @@ import Loader from "./components/Loader";
 import ErrorMessage from "./components/Error";
 import { MovieProp } from "./types";
 import SelectedMovie from "./components/Main/SelectedMovie";
-
-const KEY = "254f3c70";
-const URL = `http://www.omdbapi.com/?apikey=${KEY}&`;
+import { useMovies } from "./hooks/useMovies";
 
 const average = (arr: Array<any>) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 function App() {
-    const [movies, setMovies] = useState<MovieProp[]>([]);
-    const [watched, setWatched] = useState<MovieProp[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [query, setQuery] = useState("");
-    const [selectedId, setSelectedId] = useState<string>("");
+    const [query, setQuery] = useState<string | null>("");
+    const [selectedId, setSelectedId] = useState<string | null>("");
+
+    // Very important - React specific - Never call the function directly if the value is calculated.
+    // Instead pass the whole function which is calculating and returning the value.
+    // Never do - useState(JSON.parse(String(localStorage.getItem("watched")))
+    // This is called lazy evaluation.
+    // Function must be pure and accept no arguements. Called only on initial render.
+    const [watched, setWatched] = useState<MovieProp[]>(function () {
+        const storedValue = localStorage.getItem("watched");
+        return storedValue ? JSON.parse(String(storedValue)) : [];
+    });
 
     const avgImdbRating = Number(
         average(watched.map((movie: MovieProp) => Number(movie.imdbRating)))
@@ -39,11 +43,11 @@ function App() {
     );
 
     function handleSelectMovie(id: string) {
-        setSelectedId((selectedId) => (id === selectedId ? "" : id));
+        setSelectedId((selectedId) => (id === selectedId ? null : id));
     }
 
     function handleCloseMovie() {
-        setSelectedId("");
+        setSelectedId(null);
     }
 
     function handleAddedWatched(movie: MovieProp) {
@@ -66,59 +70,18 @@ function App() {
 
     // How to fetch data and set state:
     // Dependency array is to add a dependent state when changed, this useEffect should run again.
+    // Commented because using async/await in another and also transferred to useMovies custom hook.
     // useEffect(() => {
     //     fetch(`${URL}s=inception`)
     //         .then((res) => res.json())
     //         .then((data) => setMovies(data.Search));
     // }, []);
 
-    // Never make the useEffect callback async, instead use an async function inside it:
-    useEffect(
-        /*async - never do this*/ () => {
-            // Cleanup of data fetching - to prevent race conditions.
-            const controller = new AbortController();
-            async function getMovies() {
-                try {
-                    setError("");
-                    setIsLoading(true);
-                    let url = `${URL}s=${query}`;
-                    console.log(url);
-                    const res = await fetch(url, {
-                        signal: controller?.signal,
-                    });
-                    if (!res.ok) {
-                        throw new Error("Something went wrong");
-                    }
-                    const data = await res.json();
-                    if (data.Response === "False") {
-                        throw new Error("Movie not found");
-                    }
-                    setMovies(data.Search);
-                    setError("");
-                } catch (e: any) {
-                    // Cleanup of data fetching - to prevent race conditions.
-                    if (e?.name !== "AbortError") {
-                        setError(e.message);
-                    }
-                } finally {
-                    setIsLoading(false);
-                }
-            }
-            if (query.length < 3) {
-                setMovies([]);
-                setError("");
-                return;
-            }
-            getMovies();
-            handleCloseMovie();
+    const { movies, error, isLoading } = useMovies(query, handleCloseMovie);
 
-            // Cleanup of data fetching - to prevent race conditions.
-            return function () {
-                controller.abort();
-            };
-        },
-        [query]
-    );
+    useEffect(() => {
+        localStorage.setItem("watched", JSON.stringify([...watched]));
+    }, [watched]);
     // ===============================================================================================================
 
     return (
@@ -136,10 +99,10 @@ function App() {
                 {/* After component composition - we found that there were 2 components doing the same thing.
                 So we made both as one MoviesBox component */}
                 <MoviesBox>
-                    {!isLoading && !error && !query && (
+                    {!isLoading && !error && !movies.length && (
                         <h1>Search For a Movie...</h1>
                     )}
-                    {isLoading && !error && <Loader />}
+                    {isLoading && !error && !movies.length && <Loader />}
                     {!isLoading && !error && (
                         <ul className="list list-movies">
                             {movies?.map((movie: MovieProp) => (
