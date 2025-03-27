@@ -1,0 +1,30 @@
+.nav {
+    background-color: orangered;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* This is how you add a class for elements that have predefined classes.
+    CSS actually converts class names e.g. nav to something like nav__232dsdf
+    So if you import this file and use the class as it is it will work fine but it won't work for predefined
+    classes like .active .hover etc because these gets added automatically some libraries.
+*/
+
+/* This won't work */
+/* .nav .active {
+    background-color: green;
+} */
+
+/* This will work */
+.nav :global(.active) {
+    background-color: green;
+}
+
+/* defining a global css class inside a local module */
+:global(.test) {
+    background-color: red;
+}
