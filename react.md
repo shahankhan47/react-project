@@ -141,3 +141,8 @@ Component Categories:
         -   Pages, layouts or screens
         -   Result of composition
         -   Can be huge and non-reusable
+
+=======================================================================================================================
+Some tips and cheatsheet:
+
+-   callback function passed in useEffect means it will only run in the initial render and not on every re-render.

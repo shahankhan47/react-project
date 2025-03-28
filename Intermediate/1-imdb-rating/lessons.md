@@ -111,10 +111,6 @@ Race Condition Problems:
         be stored in the state.
 -   To prevent this for http fetch, we can write cleanup functions for data fetching.
 
-Global Keypress Event:
-
--
-
 =======================================================================================================================
 REACT HOOKS
 =======================================================================================================================
