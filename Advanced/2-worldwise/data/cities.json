@@ -1,40 +1,52 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "emoji": "🇵🇹",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 73930385
-    },
-    {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
+      "cityName": "London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "emoji": "GB",
+      "date": "Sat Mar 29 2025 06:38:42 GMT+0530 (India Standard Time)",
       "notes": "",
       "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
+        "lat": "51.50269666271666",
+        "lng": "-0.14282226562500003"
       },
-      "id": 17806751
+      "id": 1
     },
     {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
+      "cityName": "Paris",
+      "country": "France",
+      "emoji": "FR",
+      "date": "Sat Mar 29 2025 06:38:50 GMT+0530 (India Standard Time)",
+      "notes": "",
       "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
+        "lat": "48.85307272693598",
+        "lng": "2.3524475097656254"
       },
-      "id": 98443197
+      "id": 2
+    },
+    {
+      "cityName": "New York City",
+      "country": "United States of America (the)",
+      "emoji": "US",
+      "date": "Sat Mar 29 2025 06:39:05 GMT+0530 (India Standard Time)",
+      "notes": "",
+      "position": {
+        "lat": "40.71371087581695",
+        "lng": "-73.99635314941408"
+      },
+      "id": 3
+    },
+    {
+      "cityName": "Auckland",
+      "country": "New Zealand",
+      "emoji": "NZ",
+      "date": "Sat Mar 29 2025 06:39:25 GMT+0530 (India Standard Time)",
+      "notes": "",
+      "position": {
+        "lat": "-36.86850353802702",
+        "lng": "174.7600364685059"
+      },
+      "id": 4
     }
   ]
 }

@@ -82,3 +82,7 @@ Alternative to using CSS (No CSS in application):
 
 In this project we have used CSS Modules, one css file per component. Importing the css file as a variable and
 using it as a json object with the classes defined in the css file as json keys.
+
+===================================================================================================================
+
+-   using geoLocation as a reusable hook to fetch user's current location.

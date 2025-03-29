@@ -5,7 +5,7 @@ import Message from "./Message";
 import Spinner from "./Spinner";
 
 export type CityType = {
-    id: number;
+    id?: number;
     cityName: string;
     country: string;
     emoji: string;
