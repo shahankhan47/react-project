@@ -7,7 +7,7 @@ function Button({
     type,
 }: {
     children: ReactNode;
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     type: string;
 }) {
     return (

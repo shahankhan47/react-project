@@ -10,38 +10,49 @@ import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
 import CitiesProvider from "./contexts/CitiesContext";
+import AuthProvider from "./contexts/FakeAuthContext";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
     return (
-        <CitiesProvider>
-            <BrowserRouter>
-                <Routes>
-                    {/* <Route path="/" element={<Homepage />} /> */}
-                    <Route index element={<Homepage />} />
-                    <Route path="product" element={<Product />} />
-                    <Route path="pricing" element={<Pricing />} />
-                    <Route path="app" element={<AppLayout />}>
-                        {/* Creating nested routes below /app/cities, etc */}
+        <AuthProvider>
+            <CitiesProvider>
+                <BrowserRouter>
+                    <Routes>
+                        {/* <Route path="/" element={<Homepage />} /> */}
+                        <Route index element={<Homepage />} />
+                        <Route path="product" element={<Product />} />
+                        <Route path="pricing" element={<Pricing />} />
                         <Route
-                            index
+                            path="app"
                             element={
-                                // <CityList cities={cities} isLoading={isLoading} />
-                                // Instead of setting a default element, we instead redirect to the default route.
-                                // This will have path url/app/cities instead of url/app as above
-                                <Navigate replace to="cities" />
+                                <ProtectedRoute>
+                                    <AppLayout />
+                                </ProtectedRoute>
                             }
-                        />
-                        <Route path="cities" element={<CityList />} />
-                        <Route path="cities/:id" element={<City />} />
-                        <Route path="countries" element={<CountryList />} />
-                        <Route path="form" element={<Form />} />
-                    </Route>
-                    <Route path="login" element={<Login />} />
+                        >
+                            {/* Creating nested routes below /app/cities, etc */}
+                            <Route
+                                index
+                                element={
+                                    // <CityList cities={cities} isLoading={isLoading} />
+                                    // Instead of setting a default element, we instead redirect to the default route.
+                                    // This will have path url/app/cities instead of url/app as above
+                                    <Navigate replace to="cities" />
+                                }
+                            />
+                            <Route path="cities" element={<CityList />} />
+                            <Route path="cities/:id" element={<City />} />
+                            <Route path="countries" element={<CountryList />} />
+                            <Route path="form" element={<Form />} />
+                        </Route>
+                        <Route path="login" element={<Login />} />
 
-                    <Route path="*" element={<PageNotFound />} />
-                </Routes>
-            </BrowserRouter>
-        </CitiesProvider>
+                        <Route path="*" element={<PageNotFound />} />
+                    </Routes>
+                </BrowserRouter>
+            </CitiesProvider>
+        </AuthProvider>
     );
 }
 
