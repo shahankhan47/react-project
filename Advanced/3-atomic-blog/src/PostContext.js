@@ -3,7 +3,7 @@
 // App component wraps all the children inside this context which is being passed as the children prop here.
 // This is what happens in real world projects.
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { createRandomPost } from "./App";
 
 const PostContext = createContext();
@@ -32,18 +32,19 @@ function PostProvider({ children }) {
         setPosts([]);
     }
 
+    // Memoizing the value of the Context Provider because it is an object and JS will create new with every re-render.
+    const value = useMemo(() => {
+        return {
+            posts: searchedPosts,
+            onAddPost: handleAddPost,
+            onClearPosts: handleClearPosts,
+            searchQuery,
+            setSearchQuery,
+        };
+    }, [searchedPosts, searchQuery]);
+
     return (
-        <PostContext.Provider
-            value={{
-                posts: searchedPosts,
-                onAddPost: handleAddPost,
-                onClearPosts: handleClearPosts,
-                searchQuery,
-                setSearchQuery,
-            }}
-        >
-            {children}
-        </PostContext.Provider>
+        <PostContext.Provider value={value}>{children}</PostContext.Provider>
     );
 }
 

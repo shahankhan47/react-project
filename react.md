@@ -143,6 +143,66 @@ Component Categories:
         -   Can be huge and non-reusable
 
 =======================================================================================================================
+Some Performance Optimization Tools:
+
+-   Prevent Wasted Renders:
+    -   memoization: memo, useMemo, useCallback
+    -   passing elements as children or normal prop
+-   Improve app speed / responsiveness:
+    -   useMemo, useCallback, useTransition
+-   Reduce bundle size:
+    -   Using fewer 3rd party packages
+    -   Code splitting and lazy loading.
+
+Optimizing wasted renders:
+
+-   When does a component re-render?
+    -   In 3 different situations:
+        -   state changes
+        -   context changes
+        -   parent component re-renders
+        -   One more partial situation - when props change (this is because parent re-renders)
+-   Wasted render is a render that didn't produce any change in dom.
+-   It is only a problem when that happens too frequently or a component is very slow.
+
+Optimization trick with children prop (See Advanced -> 3-atomic-blog -> Test.js file):
+
+-   If a component has some state changes and it returns a piece of JSX which does not depend on those state,
+    whenever the state will change, it will also re-render the component (meaning it will return the JSX again).
+    This is usual react behaviour.
+-   If the state change is too slow, the JSX render will also take lot of time. But since the JSX is independent,
+    we can also make it not re-render itself everytime the state is changed by making a separate component out of the JSX and passing it as a children prop.
+-   This way react will not render the children everytime the state is changed in the parent. This is because when
+    children prop is passed, we never pass any other data into the children so react knows that the it is
+    independent of the state changes but with JSX returned in parent itself, react wouldn't know.
+
+Memoization:
+
+-   Memoize components with memo (See Advanced -> 3-atomic-blog -> App-Memo.js file)
+    -   Used to create a component that will not re-render when its parent re-render, as long as the props stay the same between renders.
+    -   Only works with props. Not local state changes or context changes.
+    -   Only makes sense with component which is heavy (slow rendering), re-renders often, and does so with same props.
+-   Memoize objects with useMemo
+-   Memoize functions with useCallback
+
+Issue with memo:
+
+-   If we pass an object or function to child component as a prop, the child component will see them as new prop in each re-render. This is because in JS {} !== {}.
+-   If it sees them as new prop, memo will not work.
+-   This is why we would want to use useMemo and useCallback to memoize value (useMemo) and functions (useCallback)
+
+useMemo and useCallback:
+
+-   Values will be stored in memory and preserved in subsequent re-renders, as long as input (dependencies) stays the same.
+-   Also have a dependency array.
+-   When a dependency changes, value will not be returned from cache but will be calculated.
+-   setter functions from useState are automatically memoized.
+-   3 big use cases:
+    -   Memoizing props to prevetn wasted re-renders.
+    -   Memoizing values to avoid expensive re-renders.
+    -   Memoizing values that are used in the dependency array of another hook (avoid infinite loops).
+
+=======================================================================================================================
 Some tips and cheatsheet:
 
 -   callback function passed in useEffect means it will only run in the initial render and not on every re-render.
