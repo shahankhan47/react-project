@@ -202,7 +202,13 @@ useMemo and useCallback:
     -   Memoizing values to avoid expensive re-renders.
     -   Memoizing values that are used in the dependency array of another hook (avoid infinite loops).
 
+Code optimization using code-splitting and lazy loading:
+
+-   Load a component (usually a page) instead of normal import do `const Page = lazy(() => import("./pages/Page"));`.
+-   Wrap all the lazy loaded components in a `<Suspense fallback={FallbackElement}>` tag.
+
 =======================================================================================================================
 Some tips and cheatsheet:
 
 -   callback function passed in useEffect means it will only run in the initial render and not on every re-render.
+-   useEffect is run only after the component is rendered. So for the first render, it is run. Then if a state is changed inside it, it runs again. That is why you see 2 console.logs when you change a state once.

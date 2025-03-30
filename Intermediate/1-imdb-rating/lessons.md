@@ -111,6 +111,38 @@ Race Condition Problems:
         be stored in the state.
 -   To prevent this for http fetch, we can write cleanup functions for data fetching.
 
+Rules of useEffect dependency array:
+
+-   Every state/prop used in affect must be included
+-   All "reactive values" must be included. It means any functions or variables that reference any other state, etc.
+-   Dependencies choose themselves. Never ignore the `exhaustive-deps` ES Lint rule.
+-   Don't use objects or arrays as dependencies. They are not primitive types.
+
+Removing unnecessary dependencies:
+
+-   Removing function dependencies:
+
+    -   Move function into the effect.
+    -   If function is used in multiple places, memoize it.
+    -   If function doesn't use any reactive value, move it out of the component.
+
+-   Removing object dependencies:
+
+    -   Include only the properties of the object that is dependent on (primitive types).
+    -   if that doesn't work, use same strategy for functions mentioned above.
+
+-   Other strategies:
+    -   If multiple reative values are related, use useReducer.
+    -   Don't include setState and dispatch as react guarantees that these are stable between renders.
+
+When not to use an effect:
+
+-   Should be used as last resort.
+-   3 case when they are overused:
+    -   React to a user event - should be handled by an eventHandler and not inside effect.
+    -   Fetching data on component mount - fine for smaller apps. For real-world libraries like react query should be used.
+    -   Synchronizing state changes with one another - Try to use derived state and event handlers.
+
 =======================================================================================================================
 REACT HOOKS
 =======================================================================================================================
