@@ -48,4 +48,4 @@ What tools to use when:
 1. UI and Local - useState, useReducer, useRef
 2. Remote and Local - fetch + useEffect + (useState/useReducer) - this is mostly in small apps
 3. UI and Global - React Router, Context API + useState/useReducer OR Redux, React Query, SWR, Zustand, etc.
-4. Remote and Global - Context API + useState/useReducer OR Redux, React Query, SWR, Zustand, etc.
+4. Remote and Global - React Query, SWR, Zustand, etc. (Also Context API + useState/useReducer OR Redux)

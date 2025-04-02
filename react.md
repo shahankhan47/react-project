@@ -1,3 +1,6 @@
+=======================================================================================================================
+REACT
+=======================================================================================================================
 Extremely popular - Huge job market. Gigantic third-party ecosystem.
 Declarative - Telling react what a component should look like based on current state away from DOM using jsx.
 Component-based - Each unit in the UI is a component.
