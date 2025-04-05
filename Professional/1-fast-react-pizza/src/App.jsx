@@ -12,7 +12,7 @@ import NotFound from "./ui/Error";
 const router = createBrowserRouter([
     {
         element: <AppLayout />,
-        // errorElement: <NotFound />,
+        errorElement: <NotFound />,
         children: [
             {
                 path: "/",
