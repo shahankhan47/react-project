@@ -112,7 +112,7 @@ Displaying error page:
 - To get the error message inside the error component, we can use an in-built hook `useRouteError()` which is provided by `react-router-dom`
 
 =======================================================================================================================
-React Router Actions - Writing Data:
+React Router Actions - Writing Data (Forms):
 
 - react-router-dom provides its own `<Form>` tag to be used to write data for react router.
 - the `<Form>` component takes a prop called `method="POST"` which is http method (POST/PUT/DELETE but not GET).
