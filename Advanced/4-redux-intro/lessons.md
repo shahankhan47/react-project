@@ -89,6 +89,16 @@ How to make asynchronous api calls and other operations in your action creators:
 -   When a function is returned from an action creator inside of the action itself, react knows that it is an async function and thunk gets activated.
 -   This function should receive 2 params - 1st param is the dispatch method and 2nd is the global state (optional).
 
+Thunks - createAsyncThunk - new way of creating thunk (See PRofessional -> 1-fast-react-pizza -> userSlice.js):
+
+1. Place your async function code inside a function expression like this:
+    - `export const fetchAddress = createAsyncThunk("user/fetchAddress", async () => {<async code here>}`
+2. Inside the slice object create a new property called "extraReducers" with the value of:
+    - `extraReducers: (builder) => builder.addCase(fetchAddress.pending, (state, action) => {state.status = "loading";}),`
+    - Inside the builder.addCase, we can add a case for 3 different types of states of the async function:
+        - pending, fulfilled, rejected
+    - You can add a `builder.addCase()` for all the 3 cases.
+
 =======================================================================================================================
 Redux Dev Tools:
 =======================================================================================================================

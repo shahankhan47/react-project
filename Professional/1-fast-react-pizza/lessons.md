@@ -137,6 +137,24 @@ React router redirect (instead of useNavigate()):
 - Syntax: `redirect("/path/nestedPath")`
 
 =======================================================================================================================
+Fetching data from different route without being navigated (useFetcher):
+
+- `const fetcher = useFetcher();`
+- Inside useEffect do: `fetcher.load("/<your-route>");`
+- the data is now stored in `fetcher.data`
+- the fetcher also has a state property which are `idle`, `loading`, `submitting`
+
+=======================================================================================================================
+Updating form data with useFetcher() without causing a navigation:
+
+When we do `const fetcher = useFetcher()`, the <fetcher.Form> can be used to wrap any other component, especially buttons, to allow us to submit a form once again without causing a navigation.
+In the ation function of the form, we can do any async operation and as soon as the operations are completed, it will cause the current component/page to be re-rendered without a refresh (navigation).
+
+This is very useful when we want to update some form data and not have to manually refresh the page.
+
+Question - why can't we achieve the same thing with an onClick event handler?
+
+=======================================================================================================================
 TAILWIND CSS
 =======================================================================================================================
 A utility first CSS framework packed with utility classes like flex, text-centre, and rotate-90 that can be composed to build any design directly in your markup.
