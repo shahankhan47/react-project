@@ -53,3 +53,13 @@ React Icons
 -   npm i reat-icons
 -   import { IconName } from react-icons/<iconset>
 -   See documentation. All the icon names and icon sets are there.
+
+=======================================================================================================================
+Supabase
+=======================================================================================================================
+
+-   Service to easily create a backend with Postgres.
+-   Automatically creates a database and api. We don't need to create the backend.
+-   No backend development needed.
+-   Perfect to get up and running quickly.
+-   Also comes with easy-to-use user auth and file storage

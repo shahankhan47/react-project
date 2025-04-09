@@ -106,3 +106,42 @@ Build Navigation (Jump between pages):
 -   In the MainNav, add styled <ul> and inside that add all the <li> components. These are all the links.
 -   Each <li></li> contains a styled <NavLink> component called StyledNavLink.
 -   Each link contains an icon and a text wrapped in <span>.
+
+=======================================================================================================================
+Creating the backend with Supabase:
+
+-   Created a new Supabase project.
+-   Modeling data relationships
+    -   State Domains ========================================================== Features
+        Bookings ---------------------------------------------------- Bookings, Dashboard, Check in/out
+        Cabins ----------------------------------------------------------------- Cabins
+        Guests ----------------------------------------------------------------- Guests
+        Settings --------------------------------------------------------------- Settings
+        Users ------------------------------------------------------------------ Authentication
+    -   The Booking state is unique as it will be linked to Guests and Cabins because:
+        -   We need to know the booking is linked to which guest and is assigned which cabin.
+    -   All are global states stored in Supabase.
+    -   One table for each state (slice) in the database.
+
+Creating Database:
+
+-   create bookings, cabins, guests and settings table in supabase.
+-   Supabase automatically creates users table for authentication.
+-   Add policies in each table to enable read access to all users.
+
+Connect to our react app:
+
+-   npm i @supabase/supabase-js --save
+-   import { createClient } from '@supabase/supabase-js'
+    const supabaseUrl = 'https://xruibfoqjsllkkhebvoc.supabase.co'
+    const supabaseKey = process.env.SUPABASE_KEY
+    const supabase = createClient(supabaseUrl, supabaseKey)
+-   Using specific api to read/write/delete data provided in the API docs for each table.
+    -   Just compy and paste the code.
+
+Setting Up storage buckets:
+
+-   Create storage bucket under the storage section
+-   Make the bucket public
+-   Drag and drop images to store.
+-   Get URL for the image.
