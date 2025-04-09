@@ -206,3 +206,25 @@ Uploading an Image:
 -   Added code to create the new cabin with newly created image path in apiCabins.js
 -   Added code to actually update the image to supabase bucket.
 -   If there is an error, delete the newly created cabin.
+
+Editing an Image:
+
+-   Created clone of CreateCabinForm.jsx (v1)
+-   In CabinRow.jsx passed the cabin as a prop named `cabinToEdit`
+-   Also added a button and state to show/hide the CreateCabinForm for now. Will replace with modal in future.
+-   Now in the new CreateCabinForm, extracted all data from `cabinToEdit` into id and all other values into editValues.
+-   Checking if the <CreateCabinForm> when open is in edit mode or create mode by checking if id exists.
+-   If edit mode:
+    -   setting the defaultValues
+    -   Submit button name changed to Edit Cabin
+    -   Image input field not required because the image cannot be loaded as a default value.
+-   In the apiCabins, renamed createCabin to createEditCabins and made changes based on optional param id.
+    -   Also checked if the image property already has the imagePath for edit mode.
+        -   the image property has imagePath when edit mode and has the image file when create mode.
+        -   If in edit mode, the imagePath starts with the supabase url.
+        -   If imagePath is already there, we keep it as it is.
+        -   If image is a file, we create the new imagePath.
+-   In the CreateCabinForm.jsx:
+    -   Created separate mutations for create and edit.
+    -   in the onSubmit called create mutate or edit mutate functions based on isEditSession
+    -   Before that also set the image to whether it's the image path or image file.

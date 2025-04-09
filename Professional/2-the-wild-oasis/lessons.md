@@ -110,7 +110,7 @@ Usage:
 
 -   Updating (Mutating a state) React Specific - Very Important:
     -   First use `useQueryClient()` hook to use existing client: `const queryClient = useQueryClient()`
-    -   Use the `useMutate()` hook to mutate a state like:
+    -   Use the `useMutation()` hook to mutate a state like:
         -   ```javascript
             const { isLoading: isDeleting, mutate } = useMutation({
                 mutationFn: deleteCabin,
@@ -126,6 +126,7 @@ Usage:
         -   the method returns a function mutate which can be used in any eventHandler.
         -   the method accepts an object as param. The keys of the object are:
             -   mutationFn - your async api method
+                -   mutationFn returns a callback which accepts only 1 param which is an object.
             -   onSuccess - what to do when the api returns success.
             -   onError - what to do on error.
             -   there are other keys as well. You can check out.
@@ -191,6 +192,10 @@ React Hook Form:
                 "Discount should be less than the regular price",
         })}
         ```
+
+Open your form with default values already there:
+
+-   use the hook like: `useForm({defaultValues: values});`
 
 =======================================================================================================================
 Miscellaneous
