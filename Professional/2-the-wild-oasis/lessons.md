@@ -49,6 +49,10 @@ Styling third party components:
 -   Example { NavLink } from "react-router-dom.
 -   We can just do `styled(NavLink)` instead of `styled.div`
 
+Adding default props to the styled component in the following way:
+
+-   "StyledBUtton = styled.button.attrs({onClick: method})``"
+
 =======================================================================================================================
 React Icons
 =======================================================================================================================
@@ -187,3 +191,21 @@ React Hook Form:
                 "Discount should be less than the regular price",
         })}
         ```
+
+=======================================================================================================================
+Miscellaneous
+=======================================================================================================================
+
+Uploading an image:
+
+-   Make the input type as file.
+-   Upload an image and get the data from the form.
+-   Create the image name: `const imageName = `${Math.random()}-${newCabin?.image?.name}`.replace(/\//g,"");`
+    -   replacing all / to blank because if there's a blank, supabase creates a new folder.
+-   Create image path: `const imagePath = `${SUPABASE_URL}/storage/v1/object/public/cabin-images//${imageName}`;`
+-   Set the RLS policy to allow all users for your storage bucket in supabase.
+-   When creating the new object containing the image property, set the image property to the imagePath:
+    -   `.insert([{ ...newCabin, image: imagePath }])`
+-   Upload the image to supabase: `const { error: storageError } = await supabase.storage.from("cabin-images").upload(imageName, newCabin?.image);`
+-   Delete the cabin if there was an error:
+    -   `if (storageError) {await supabase.from("cabins").delete().eq("id", data?.id);}`

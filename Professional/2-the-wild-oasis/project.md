@@ -198,3 +198,11 @@ Creating a new FormRow component because each Input in the form is almost the sa
     -   The <Label> is connected with the <Input> using the htmlFor prop.
     -   The htmlFor always has the same value as the id of the input.
     -   Therefore the id can be accessed inside the FormRow as children.props.id
+
+Uploading an Image:
+
+-   Registered the image in the form image input element.
+-   Mutated the data to have image property as `data?.image?.[0]` as this is the actual image file.
+-   Added code to create the new cabin with newly created image path in apiCabins.js
+-   Added code to actually update the image to supabase bucket.
+-   If there is an error, delete the newly created cabin.
