@@ -40,9 +40,6 @@ Styled Component Props (See Heading.jsx):
 -   In the above example, we are styling an h1 tag but setting the css for h2 if the prop `type = h2`. This is not recommended because it will make the component appear as an h2 tag even though it will render as an h1 element.
 -   To avoid this react gives us a special prop called `as` and when we set this prop, the component will be rendered as the value we will provide
 -   We can even set the default prop to a styled component like: `Row.defaultProps = {type: "vertical"}`. This way we wouldn't have to set the prop if it is of the default prop value.
--   The `role` prop can be used if we want to style an element and want the browser to display it as some other element without rendering it as that other element.
-    -   E.g. StyledDiv = styled.div``
-    -   If we use <StyledDiv role="table"> it will act as table but will render in browser as div.
 
 Styling third party components:
 
@@ -66,31 +63,3 @@ Supabase
 -   No backend development needed.
 -   Perfect to get up and running quickly.
 -   Also comes with easy-to-use user auth and file storage
-
-=======================================================================================================================
-React Query
-=======================================================================================================================
-
--   Powerful library for managing remote (server) state.
--   Many features that allow us to write a lot less code.
--   Also makes UI/UX better.
-
-Why react query:
-
--   Data is stored in a cache.
--   Automatic loading and error states
--   Automatic re-fetching to keep the state synced.
--   Pre-fetch data -> fetch before displaying data (e.g. pagination).
--   Easy remote state mutation (updating)
--   Offline support.
--   Needed because remote state is fundamentally different from UI state.
-
-Installation:
-
--   npm i @tanstack/react-query@4
--   In App.jsx:
-    -   `const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 60 \* 1000, },},});`
-    -   Wrap the whole component inside <QueryClientProvider client={queryClient}>
--   Dev Tools: npm i @tanstack/react-query-devtools --save-dev
-    -   `import { ReactQueryDevtools } from "@tanstack/react-query-devtools";`
-    -   Add <ReactQueryDevtools initialIsOpen={false} /> just below the QueryClientProvider
