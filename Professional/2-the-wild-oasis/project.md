@@ -145,3 +145,56 @@ Setting Up storage buckets:
 -   Make the bucket public
 -   Drag and drop images to store.
 -   Get URL for the image.
+
+=======================================================================================================================
+Reading Cabin data:
+
+-   Used react query to get Cabins Data inside CabinTable.jsx. Set a unique queryKey always.
+-   Created styled div with role as table, containing styled header with role row component and then displaying all cabins.
+-   Each cabinRow contains a styled div with role row and inside the div are:
+    -   styled img to display cabin image.
+    -   styled div to display cabin name
+    -   normal div to display description and max capacity
+    -   styled div to display price
+    -   styled div to display discount
+    -   normal button for now to delete the cabin
+
+Deleting a Cabin:
+
+-   created the deleteCabin api in apiCabins.js
+-   enable public delete policy in supabase for now.
+-   calling the api from the CabinROw.jsx using useMutate() hook.
+-   alerting on error/success for now.
+-   replacing alert with toast created by react-hot-toast
+
+Adding a new Cabin (Working with react-hook-form):
+
+-   in Cabins.jsx created a new local state called showForm.
+-   added a button after CabinTable component which sets the showForm to true on click.
+-   below the button conditionally rendered the <CreateCabinForm> component when showForm is true.
+-   installed npm i react-hook-form@7
+-   use the hook - useForm() and register all inputs.
+-   create the onSubmit for the parent <Form> element
+-   create the api in apiCabins.js file after setting up insert/update policy in supabase.
+-   create the useMutate() hook with the api function created.
+-   invalidate the cache for the relevant queryKey
+-   call the `mutate(data)` inside your own onSubmit method.
+
+Setting the app layout (sidebar and header) as fixed by adding `overflow: scroll;` to the <Main> in AppLayout.
+
+Form Validation:
+
+-   Form validation after setting the `{required: "This field is required"}` for each input.
+-   Adding the onError method.
+-   Validating some other fields using some more properties provided by react-hook-form like min/max/etc.
+-   Adding custom validation to the discount field
+-   Getting the errors from `formState`
+-   Displaying the error conditionally for each input
+
+Creating a new FormRow component because each Input in the form is almost the same.
+
+-   The only weird thing is the `children.props.id`.
+    -   This is because we know the component will always have only 1 children i.e. <Input> component.
+    -   The <Label> is connected with the <Input> using the htmlFor prop.
+    -   The htmlFor always has the same value as the id of the input.
+    -   Therefore the id can be accessed inside the FormRow as children.props.id

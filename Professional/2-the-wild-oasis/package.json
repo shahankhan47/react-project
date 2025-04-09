@@ -11,13 +11,18 @@
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.49.4",
+        "@tanstack/react-query": "^4.36.1",
+        "date-fns": "^4.1.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-hook-form": "^7.55.0",
+        "react-hot-toast": "^2.5.2",
         "react-icons": "^5.5.0",
         "react-router-dom": "^6.11.1",
         "styled-components": "^6.1.17"
     },
     "devDependencies": {
+        "@tanstack/react-query-devtools": "^4.36.1",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
         "@vitejs/plugin-react": "^4.0.3",

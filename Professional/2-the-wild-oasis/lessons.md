@@ -40,6 +40,9 @@ Styled Component Props (See Heading.jsx):
 -   In the above example, we are styling an h1 tag but setting the css for h2 if the prop `type = h2`. This is not recommended because it will make the component appear as an h2 tag even though it will render as an h1 element.
 -   To avoid this react gives us a special prop called `as` and when we set this prop, the component will be rendered as the value we will provide
 -   We can even set the default prop to a styled component like: `Row.defaultProps = {type: "vertical"}`. This way we wouldn't have to set the prop if it is of the default prop value.
+-   The `role` prop can be used if we want to style an element and want the browser to display it as some other element without rendering it as that other element.
+    -   E.g. StyledDiv = styled.div``
+    -   If we use <StyledDiv role="table"> it will act as table but will render in browser as div.
 
 Styling third party components:
 
@@ -63,3 +66,124 @@ Supabase
 -   No backend development needed.
 -   Perfect to get up and running quickly.
 -   Also comes with easy-to-use user auth and file storage
+
+=======================================================================================================================
+React Query
+=======================================================================================================================
+
+-   Powerful library for managing remote (server) state.
+-   Many features that allow us to write a lot less code.
+-   Also makes UI/UX better.
+
+Why react query:
+
+-   Data is stored in a cache.
+-   Automatic loading and error states
+-   Automatic re-fetching to keep the state synced.
+-   Pre-fetch data -> fetch before displaying data (e.g. pagination).
+-   Easy remote state mutation (updating)
+-   Offline support.
+-   Needed because remote state is fundamentally different from UI state.
+
+Installation:
+
+-   npm i @tanstack/react-query@4
+-   In App.jsx:
+    -   `const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 60 \* 1000, },},});`
+    -   Wrap the whole component inside <QueryClientProvider client={queryClient}>
+-   Dev Tools: npm i @tanstack/react-query-devtools --save-dev
+    -   `import { ReactQueryDevtools } from "@tanstack/react-query-devtools";`
+    -   Add <ReactQueryDevtools initialIsOpen={false} /> just below the QueryClientProvider
+
+The staleTime means how long react query should wait before fetching the data again as react query unlike useEffect does not fetch on every render but waits for a period of time to fetch again. If you want the fetch to happen before staleTime, just refresh the page.
+
+Usage:
+
+-   Fetching data:
+
+    -   `const {...otherProperties, data} = useQuery({queryKey: ['your state key'], queryFn: fetchDataFn})`
+    -   the query key should always be defined like: `['your state key']` as an array of 1 string.
+
+-   Updating (Mutating a state) React Specific - Very Important:
+    -   First use `useQueryClient()` hook to use existing client: `const queryClient = useQueryClient()`
+    -   Use the `useMutate()` hook to mutate a state like:
+        -   ```javascript
+            const { isLoading: isDeleting, mutate } = useMutation({
+                mutationFn: deleteCabin,
+                onSuccess: () => {
+                    alert("Cabin Successfully Deleted");
+                    queryClient.invalidateQueries({
+                        queryKey: ["cabins"],
+                    });
+                },
+                onError: (err) => alert(err.message),
+            });
+            ```
+        -   the method returns a function mutate which can be used in any eventHandler.
+        -   the method accepts an object as param. The keys of the object are:
+            -   mutationFn - your async api method
+            -   onSuccess - what to do when the api returns success.
+            -   onError - what to do on error.
+            -   there are other keys as well. You can check out.
+    -   Without invalidating the cache, when you mutate an object, react-query will not refetch the data and re-render the component. To make it refetch data, we need to invalidate the cache. To do this, we can call:
+        -   `queryClient.invalidateQueries({queryKey: ["your state key"],})` inside the `onSuccess` function.
+
+=======================================================================================================================
+Notifications in React (react-hot-toast):
+
+-   npm i react-hot-toast --save
+
+Usage:
+
+-   In your App.jsx, create another self closing tag called <Toaster /> after <BrowserRouter/>.
+-   The Toaster element should have the following props:
+
+    -   ```javascript
+        <Toaster
+            position="top-center"
+            gutter={12} //Space between window and the toast
+            containerStyle={{ margin: "8px" }}
+            toastOptions={{
+                success: { duration: 3000 },
+                error: { duration: 5000 },
+                style: {
+                    fontSize: "16px",
+                    maxWidth: "500px",
+                    padding: "16px 24px",
+                    backgroundColor: "var(--color-grey-0)",
+                    color: "var(--color-grey-700)",
+                },
+            }}
+        />
+        ```
+
+=======================================================================================================================
+React Hook Form:
+
+-   npm i react-hook-form (version 7 is used here)
+-   Inside your form component, use the hook `const { register, handleSubmit, reset, getValues, formState } = useForm();`
+-   Register all Inputs:
+    -   The register function needs to be placed in the following way in almost every input element:
+        `<Input type="text" id="nameOfInput" {...register("nameOfInput" {required: "This field is required"})} />`
+        -   This will create new props for the Input element like onChange() and onBlur() automatically.
+        -   `{required: "This field is required"}` is only if the field is required and the value is the error message.
+-   Create the onSubmit function in the parent <Form> element like:
+    -   `<Form onSubmit={handleSubmit(yourOwnOnSubmitFunction, yourOwnErrorFunction)}>`
+-   Now your own onSubmit function takes a param `data` which will have all the form inputs.
+    -   keys of data are the `nameOfInput`.
+    -   access the input data like `data.nameOfInput`
+-   `yourOwnErrorFunction` receives param `errors` which contains the field names with errors as keys.
+    -   E.g. `errors.description`
+    -   This errors can also be retrieved when called like: `const {errors} = formState`
+-   The `reset()` when called will reset the form and make it blank.
+-   The `getValues()` can be used to get all values of all inputs.
+    -   Get value of specific input: `getValues().nameOfInput`
+-   Custom Validation - Checkout below code:
+    -   ```javascript
+        {...register("discount", {
+            required: "This field is required",
+            validate: (value) =>
+                value <= getValues().regularPrice ||  // the discount value should be less than regular price
+                "Discount should be less than the regular price",
+        })}
+        ```
