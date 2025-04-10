@@ -128,6 +128,7 @@ Creating Database:
 -   create bookings, cabins, guests and settings table in supabase.
 -   Supabase automatically creates users table for authentication.
 -   Add policies in each table to enable read access to all users.
+-   Created some cabins rows.
 
 Connect to our react app:
 
@@ -167,7 +168,7 @@ Deleting a Cabin:
 -   alerting on error/success for now.
 -   replacing alert with toast created by react-hot-toast
 
-Adding a new Cabin (Working with react-hook-form):
+Creating a new Cabin (Working with react-hook-form):
 
 -   in Cabins.jsx created a new local state called showForm.
 -   added a button after CabinTable component which sets the showForm to true on click.
@@ -207,7 +208,7 @@ Uploading an Image:
 -   Added code to actually update the image to supabase bucket.
 -   If there is an error, delete the newly created cabin.
 
-Editing an Image:
+Editing a Cabin:
 
 -   Created clone of CreateCabinForm.jsx (v1)
 -   In CabinRow.jsx passed the cabin as a prop named `cabinToEdit`
@@ -228,3 +229,13 @@ Editing an Image:
     -   Created separate mutations for create and edit.
     -   in the onSubmit called create mutate or edit mutate functions based on isEditSession
     -   Before that also set the image to whether it's the image path or image file.
+
+=======================================================================================================================
+Refactoring code into custom hooks:
+
+-   Refactored all react query code into custom hooks:
+    -   useDeleteCabin()
+    -   useCreateCabin()
+    -   useEditCabin()
+    -   useCabins()
+-   Called the reset function onSuccess as the second param of mutate functions instead of inside the useMutation().

@@ -133,6 +133,22 @@ Usage:
     -   Without invalidating the cache, when you mutate an object, react-query will not refetch the data and re-render the component. To make it refetch data, we need to invalidate the cache. To do this, we can call:
         -   `queryClient.invalidateQueries({queryKey: ["your state key"],})` inside the `onSuccess` function.
 
+The reset function provided by useForm is not accessible in the custom hooks (different file). Solution:
+
+-   The returned mutate function from the custom hooks takes in a second param as object having all the keys similar to what we set during useMutation().
+-   We can just do something like this when calling the mutate functions:
+    -   ```javascript
+        editCabin(
+            { newCabinData: { ...data, image: image }, id: editId },
+            { onSuccess: () => reset() }
+        );
+        ```
+
+Advantages of using custom hooks:
+
+-   We can call custom hook in a prior page to get the data before we even load the page using the data.
+-   This way there will be no wait time and the page will load in an instant.
+
 =======================================================================================================================
 Notifications in React (react-hot-toast):
 
