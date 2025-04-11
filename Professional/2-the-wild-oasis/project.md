@@ -258,3 +258,8 @@ Working on App Settings
     -   all variable names changed for cabin to settings.
 -   called useUpdateSetting in UpdateSettingsForm.jsx
 -   added onBlur event handler in all the field inpus. The handler calls the mutate function to update the setting.
+
+=======================================================================================================================
+Advanced react patterns:
+
+-   See 3-react-patterns project.
