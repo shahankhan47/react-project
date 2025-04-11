@@ -239,3 +239,22 @@ Refactoring code into custom hooks:
     -   useEditCabin()
     -   useCabins()
 -   Called the reset function onSuccess as the second param of mutate functions instead of inside the useMutation().
+
+Duplicating a cabin using useCreateCabin custom hook:
+
+-   Added button in CabinRow.jsx to duplicate.
+-   Replaced label names with icons.
+-   called the useCreateCabins to duplicate a cabin when the button is clicked.
+
+=======================================================================================================================
+Working on App Settings
+
+-   Created settings policy in supabase for read/write access.
+-   apiSettings.js was already provided. It's almost same as apiCabins.js.
+-   created custom hook useSettings.js
+-   called the hook in UpdateSettingsForm.jsx
+-   displayed the values in the relevant inputs.
+-   copied useEditCabin.js hook and changed its name to useUpdateSetting.
+    -   all variable names changed for cabin to settings.
+-   called useUpdateSetting in UpdateSettingsForm.jsx
+-   added onBlur event handler in all the field inpus. The handler calls the mutate function to update the setting.
