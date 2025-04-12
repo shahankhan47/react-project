@@ -298,3 +298,12 @@ Creating a reusable table:
 -   CabinROw.jsx - commented out TableRow and instead used the above Table.Row.
 -   CabinTable.jsx - passed render props into the Table.Body
 -   created Table.Body
+
+Creating a reusable menu
+
+-   CabinRow.jsx version 2 used.
+-   Files changed - CabinROw, CabinTable, Menus.jsx
+-   There were lots and lots of changes (some very confusing but still ok)
+-   Revisit how the Components are placed inside CabinRow.jsx.
+-   Very small change in CabinTable.jsx
+-   The weirdest thing is the handleClick function inside Menus.Toggle.

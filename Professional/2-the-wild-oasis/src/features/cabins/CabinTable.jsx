@@ -3,6 +3,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import { useCabins } from "./useCabins";
 import Table from "../../ui/Table";
+import Menus from "../../ui/Menus";
 
 // Version 2 - Building reusable table
 
@@ -37,20 +38,24 @@ function CabinTable() {
         return <Spinner />;
     }
     return (
-        <Table columns="1fr 1.8fr 2.2fr 1fr 1fr 1fr">
-            <Table.Header role="row">
-                <div>Photo</div>
-                <div>Cabin</div>
-                <div>Capacity</div>
-                <div>Price</div>
-                <div>Discount</div>
-                <div></div>
-            </Table.Header>
-            <Table.Body
-                data={cabins}
-                render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
-            />
-        </Table>
+        <Menus>
+            <Table columns="1fr 1.8fr 2.2fr 1fr 1fr 1fr">
+                <Table.Header role="row">
+                    <div>Photo</div>
+                    <div>Cabin</div>
+                    <div>Capacity</div>
+                    <div>Price</div>
+                    <div>Discount</div>
+                    <div></div>
+                </Table.Header>
+                <Table.Body
+                    data={cabins}
+                    render={(cabin) => (
+                        <CabinRow cabin={cabin} key={cabin.id} />
+                    )}
+                />
+            </Table>
+        </Menus>
     );
 }
 
