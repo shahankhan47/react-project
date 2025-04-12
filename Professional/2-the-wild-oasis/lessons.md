@@ -230,3 +230,22 @@ Uploading an image:
 -   Upload the image to supabase: `const { error: storageError } = await supabase.storage.from("cabin-images").upload(imageName, newCabin?.image);`
 -   Delete the cabin if there was an error:
     -   `if (storageError) {await supabase.from("cabins").delete().eq("id", data?.id);}`
+
+React Portal:
+Feature that allows us to render a component outside the parent component's DOM structure while still keeping the element in the same position in the element tree. Basically, we can render a component in any place we want inside the DOM tree but still leave the component in the dame place in the react component tree.
+Generally used for elements that we want to use on top of other elements. E.g. modal windows, tooltips, menu, etc.
+Part of react-dom.
+
+Why this is needed when just setting some css style would work:
+To avoid conflict with the css property {overflow: hidden} set to the parent. The element will not be shown in that case.
+
+cloneElement:
+create a new element based on other element. You can edit the components props in another component.
+E.g. To edit the onClick property of a button passed as children without any onClick prop.
+
+```javascript
+cloneElement(children, { onClick: () => open(opensWindowName) });
+```
+
+Preventing event bubble up in eventListener:
+Pass in a third arguement `true` to the eventListener method. `document.removeEventListener("click", handleClick, true);` to listen to the event in capturing phase.

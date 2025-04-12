@@ -1,17 +1,6 @@
 import styled from "styled-components";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
-import {
-    cloneElement,
-    createContext,
-    useContext,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
-import useOutsideClick from "../hooks/useOutsideClick";
-
-// This is compound component version 2. For pre-implementation of compound component check v1.
 
 const StyledModal = styled.div`
     position: fixed;
@@ -62,56 +51,20 @@ const Button = styled.button`
     }
 `;
 
-const ModalContext = createContext();
-
-function Modal({ children }) {
-    const [openName, setOpenName] = useState("");
-
-    const close = () => {
-        setOpenName("");
-    };
-
-    const open = (opensWindowName) => {
-        setOpenName(opensWindowName);
-    };
-
-    return (
-        <ModalContext.Provider value={{ openName, close, open }}>
-            {children}
-        </ModalContext.Provider>
-    );
-}
-
-function Open({ children, opens: opensWindowName }) {
-    const { open } = useContext(ModalContext);
-
-    return cloneElement(children, { onClick: () => open(opensWindowName) });
-}
-
-function Window({ children, name }) {
-    const { openName, close } = useContext(ModalContext);
-    // Detecting click outide the modal window anywhere in DOM.
-    const ref = useOutsideClick(close);
-
-    if (name !== openName) {
-        return null;
-    }
-
+function Modal({ children, onClose }) {
+    // React portal syntax - React specific - Very Important
     return createPortal(
         <Overlay>
-            <StyledModal ref={ref}>
-                <Button onClick={close}>
+            <StyledModal>
+                <Button onClick={() => onClose()}>
                     <HiXMark />
                 </Button>
-                <div>{cloneElement(children, { onCloseModal: close })}</div>
+                <div>{children}</div>
             </StyledModal>
         </Overlay>,
         // This second arguement is where you want your component to be placed in the DOM tree.
         document.body
     );
 }
-
-Modal.Open = Open;
-Modal.Window = Window;
 
 export default Modal;

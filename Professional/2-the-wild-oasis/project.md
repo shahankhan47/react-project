@@ -173,6 +173,7 @@ Creating a new Cabin (Working with react-hook-form):
 -   in Cabins.jsx created a new local state called showForm.
 -   added a button after CabinTable component which sets the showForm to true on click.
 -   below the button conditionally rendered the <CreateCabinForm> component when showForm is true.
+-   The render is happening in the same page for now but later will be moved to a modal.
 -   installed npm i react-hook-form@7
 -   use the hook - useForm() and register all inputs.
 -   create the onSubmit for the parent <Form> element
@@ -260,6 +261,25 @@ Working on App Settings
 -   added onBlur event handler in all the field inpus. The handler calls the mutate function to update the setting.
 
 =======================================================================================================================
-Advanced react patterns:
+Advanced react patterns (See 3-react-patterns project):
 
--   See 3-react-patterns project.
+Creating a Modal Window
+
+-   Refactoring Cabins.jsx page into AddCabin.jsx feature to make the page as simple as possible.
+-   Instead of showing form, now showing the modal when button is clicked.
+-   Passing the form as a children to the Modal.
+-   Using react portal to move the Modal's position to the document body in DOM but stay the same in React element tree.
+-   Converting the Modal into a compound component (advanced react pattern) for it to remember open/close state itself.
+    -   created new versions for both AddCabin.jsx and Modal.jsx for compound component implementation
+    -   during creation we used an advanced react feature called clone element.
+    -   this is because when we passed the button into the <Modal.Open>, how can we set an event handler for it in the Modal component without passing it as a prop. (That is the whole point of Modal window is to not remember state itself).
+        -   What we did is cloned the children (i.e. button) and edited its onClick prop there in the Modal itself.
+-   Passed in onCloseModal prop to the createCabinForm.jsx and added logic for the styling and close in it.
+    -   This way we won't be able to pass the onClose event handler to where we are calling the form because the logic to close the modal is inside the Modal component. Solution:
+    -   cloneElement to the rescue again.
+    -   cloned the children and passed onCloseModal to the close function.
+    -   Now we can use this onCloseModal prop everywhere we use the modal.
+-   Added logic (useState and useRef) to detect a click outside the modal window to close it.
+    -   A very important lesson was learnt regarding event listeners. Events bubble up the DOM tree so if we just detect the click and close it, it will be opened for a milisecond and close back again because it detects the click on the button and then also on the outside of modal.
+    -   To prevent this behaviour we used third arguement in the eventListener method to listen to the event in capturing phase.
+-   Refactored all handle outside click logic into its own custom hook useOutsideClick.js
