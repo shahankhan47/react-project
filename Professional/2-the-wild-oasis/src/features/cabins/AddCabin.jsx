@@ -23,23 +23,25 @@ import CreateCabinForm from "./CreateCabinForm";
 // Compound component implementation
 function AddCabin() {
     return (
-        <Modal>
-            <Modal.Open opens="cabin-form">
-                <Button>Add new Cabin</Button>
-            </Modal.Open>
-            <Modal.Window name="cabin-form">
-                <CreateCabinForm />
-            </Modal.Window>
+        <div>
+            <Modal>
+                <Modal.Open opens="cabin-form">
+                    <Button>Add new Cabin</Button>
+                </Modal.Open>
+                <Modal.Window name="cabin-form">
+                    <CreateCabinForm />
+                </Modal.Window>
 
-            {/* User can be able to pass multiple modals at a time inside the modal but only one of them will be 
+                {/* User can be able to pass multiple modals at a time inside the modal but only one of them will be 
             actually open. So modal needs to know for which feature it has been opened e.g. cabin-form/table/etc */}
-            {/* <Modal.Open opens="table">
+                {/* <Modal.Open opens="table">
                 <Button>Add new Cabin</Button>
             </Modal.Open>
             <Modal.Window name="table">
                 <CabinTable />
             </Modal.Window> */}
-        </Modal>
+            </Modal>
+        </div>
     );
 }
 export default AddCabin;

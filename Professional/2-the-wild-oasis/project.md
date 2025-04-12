@@ -263,7 +263,7 @@ Working on App Settings
 =======================================================================================================================
 Advanced react patterns (See 3-react-patterns project):
 
-Creating a Modal Window
+Creating a Modal Window (Adding a new cabin)
 
 -   Refactoring Cabins.jsx page into AddCabin.jsx feature to make the page as simple as possible.
 -   Instead of showing form, now showing the modal when button is clicked.
@@ -283,3 +283,8 @@ Creating a Modal Window
     -   A very important lesson was learnt regarding event listeners. Events bubble up the DOM tree so if we just detect the click and close it, it will be opened for a milisecond and close back again because it detects the click on the button and then also on the outside of modal.
     -   To prevent this behaviour we used third arguement in the eventListener method to listen to the event in capturing phase.
 -   Refactored all handle outside click logic into its own custom hook useOutsideClick.js
+
+Edit/Delete Cabin:
+
+-   Added modal window <ConfirmDelete> for deleting and <CreateCabinForm> for editing in CabinRow.jsx
+-   Handled logic for asking for confirmation when deleting.
