@@ -263,7 +263,7 @@ Working on App Settings
 =======================================================================================================================
 Advanced react patterns (See 3-react-patterns project):
 
-Creating a Modal Window (Adding a new cabin)
+Creating a Modal Window (Adding a new cabin) (compound component pattern)
 
 -   Refactoring Cabins.jsx page into AddCabin.jsx feature to make the page as simple as possible.
 -   Instead of showing form, now showing the modal when button is clicked.
@@ -288,3 +288,13 @@ Edit/Delete Cabin:
 
 -   Added modal window <ConfirmDelete> for deleting and <CreateCabinForm> for editing in CabinRow.jsx
 -   Handled logic for asking for confirmation when deleting.
+
+Creating a reusable table:
+
+-   Table.jsx - created resuable table based on compound component pattern Created Header and Row only.
+-   CabinTable.jsx - commented out styled components and used the above reusable Table instead.
+    -   It also has Table.Header
+    -   Left the map function as it is for now to refactor using render props pattern later.
+-   CabinROw.jsx - commented out TableRow and instead used the above Table.Row.
+-   CabinTable.jsx - passed render props into the Table.Body
+-   created Table.Body
