@@ -307,3 +307,20 @@ Creating a reusable menu
 -   Revisit how the Components are placed inside CabinRow.jsx.
 -   Very small change in CabinTable.jsx
 -   The weirdest thing is the handleClick function inside Menus.Toggle.
+
+=======================================================================================================================
+Other exciting features: Filter/Sort/Pagination/Auth/Dark Mode:
+
+Reusable filter component:
+
+-   In Cabins.jsx added <CabinTableOperations>.
+-   In CabinTableOperations.jsx called <Filter> component.
+-   In Filter.jsx created a reusable filtered component with basic react features like searchParams.
+    -   Setting the url param with the filter selected.
+-   In CabinTable.jsx, checking the url param and filtering out our data.
+
+Reusable sort component
+
+-   In <CabinTableOperations> added <SortBy> component
+-   Created SortBy.jsx which uses a styled <Select> element.
+-   In CabinTable.jsx added the sorting logic.
