@@ -324,3 +324,17 @@ Reusable sort component
 -   In <CabinTableOperations> added <SortBy> component
 -   Created SortBy.jsx which uses a styled <Select> element.
 -   In CabinTable.jsx added the sorting logic.
+
+Building the bookings table:
+
+-   Reused table components and did the same as Cabins for Bookings to build the bookings table.
+-   Added a temporary button in the <Sidebar> to upload data for testing.
+
+Using the reusable filter and sort component for API side filtering and sort:
+
+-   See apiBookings.js, useBookings.js, Filter.jsx, BookingTable.jsx, BookingTableOperations.jsx.
+
+Reusable Pagination component:
+
+-   Pagination.jsx, useBookings.js, apiBookings.js, BookingTable.jsx
+-   Prefetching data to store in cache (useBookings.js)
