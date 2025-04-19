@@ -352,3 +352,17 @@ Checking in a guest:
 -   Added a button to check in in BookingRow.jsx based on status.
 -   Created useCheckin.js
 -   Called useCheckin and useBooking hooks in the <CheckinBooking> component.
+
+Checking out a guest:
+
+-   Created the useCheckout.js hook.
+-   Called the useCheckout and implemented it as a button event handler in both <BookingDetail> and <BookingRow>
+-   Fixed a small bug in <Filter> component to set the page to 1 when it is not 1 and a filter is clicked.
+    -   Because when the filter is clicked and api side filtering is happening, the data is re-fetched from api again.
+    -   So when page is not 1 and there is very less data, it doesn't make sense and it should all fit in 1 page.
+
+Deleting a booking:
+
+-   Created useDeleteBooking hook copied the same from useDeleteCabin hook.
+-   Called it inside event handler in both <BookingDetail> and <BookingRow>
+    -   In both pages, it is called inside the Modal window as deleting anything should open a modal.
