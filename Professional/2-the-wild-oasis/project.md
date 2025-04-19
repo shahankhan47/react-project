@@ -338,3 +338,17 @@ Reusable Pagination component:
 
 -   Pagination.jsx, useBookings.js, apiBookings.js, BookingTable.jsx
 -   Prefetching data to store in cache (useBookings.js)
+
+Creating the booking details page:
+
+-   Booking.jsx in pages
+-   Added side menu button in BookingRow.jsx which navigates to the booking page.
+-   Writing all booking logic inside useBooking.js
+-   Rendering the booking data in BookingDetail.jsx
+
+Checking in a guest:
+
+-   Created the <Checkin> page which redirects to CheckinBooking.jsx component.
+-   Added a button to check in in BookingRow.jsx based on status.
+-   Created useCheckin.js
+-   Called useCheckin and useBooking hooks in the <CheckinBooking> component.
