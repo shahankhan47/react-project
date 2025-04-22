@@ -393,3 +393,33 @@ Logging out the user:
 -   created custom hook useLogout.
 -   created Logout.jsx
 -   called component <Logout> inside the <Header>
+
+New User Sign-Up:
+
+-   In the <Users> page, added <SignupForm>.
+-   Updated the <SignupForm> with react-hook-form logic to input and handle form data.
+-   Created the useSignUp custom hook and function signup in apiAuth.js.
+-   called the signup mutation function in the onSubmit handler for the form.
+-   Optional - enable email confirmation in supabase so that users need to verify their email first.
+    -   we can setup our own email message to be sent to the user to get verified in supabase.
+    -   can also setup the redirect urls once user gets verified or unverified in supabase.
+
+Added Row Level Security (RLS) for all tables in supabase.
+
+-   Edited the policies for all tables to only have scope set to "authenticated" users.
+
+Creating user avatar in header:
+
+-   Created UserAvatar.jsx
+-   Created HeaderMenu.jsx
+-   Added HeaderMenu in Header component, replacing it with the <Logout> component.
+-   Moved the <Logout> component inside <HeaderMenu>
+-   Modify RLS in the storage in supabase for both cabin and avatar images.
+
+Account Management Page (Update user account, name, avatar and password):
+
+-   create function updateCurrentUser in apiAuth.js
+-   created custom hook useUpdateUser.js
+-   In <Account> page, added <UpdateUserDataForm> and <UpdatePasswordForm>
+-   <UpdatePasswordForm> was already completed.
+-   Wrote the form submit logic inside UpdateUserDataForm.jsx using the useUpdateUser hook.
