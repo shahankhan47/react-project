@@ -423,3 +423,19 @@ Account Management Page (Update user account, name, avatar and password):
 -   In <Account> page, added <UpdateUserDataForm> and <UpdatePasswordForm>
 -   <UpdatePasswordForm> was already completed.
 -   Wrote the form submit logic inside UpdateUserDataForm.jsx using the useUpdateUser hook.
+
+=======================================================================================================================
+Adding Dark Mode:
+
+-   Created a new context called DarkModeContext which manages global state.
+    -   It has a provider and a hook.
+    -   The provider stores the state in the local storage, constantly checks for the state.
+    -   Adds or removes a class in the root element of html document.
+    -   The hook returns the context values as it is standard ContextApi protocol.
+-   Created a component <DarkModeToggle> - a button which uses the context by calling it's hook.
+    -   This button only changes the icon on the header.
+-   Used this <DarkModeToggle> in the <HeaderMenu>
+-   Changed <Logo> component to switch logo based on light/dark mode state by using the context hook.
+-   Finally added the CSS for root level classes `light-mode` and `dark-mode` in the GlobalStyles.js file.
+    -   When the root level element has either of these class, the CSS values will be applied.
+    -   This root element class is being added in the useEffect of the DarkModeProvider context.
