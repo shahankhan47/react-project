@@ -310,7 +310,7 @@ Creating a reusable menu
 
 =======================================================================================================================
 Other exciting features: Filter/Sort/Pagination/Auth/Dark Mode:
-
+=======================================================================================================================
 Reusable filter component:
 
 -   In Cabins.jsx added <CabinTableOperations>.
@@ -325,6 +325,7 @@ Reusable sort component
 -   Created SortBy.jsx which uses a styled <Select> element.
 -   In CabinTable.jsx added the sorting logic.
 
+=======================================================================================================================
 Building the bookings table:
 
 -   Reused table components and did the same as Cabins for Bookings to build the bookings table.
@@ -366,3 +367,29 @@ Deleting a booking:
 -   Created useDeleteBooking hook copied the same from useDeleteCabin hook.
 -   Called it inside event handler in both <BookingDetail> and <BookingRow>
     -   In both pages, it is called inside the Modal window as deleting anything should open a modal.
+
+=======================================================================================================================
+Authentication:
+
+-   Added <Logo>, <Heading> and <LoginForm> in the Login page.
+-   Disabled email confirmation from Authentication -> Sign In/Up -> Email in supabase.
+-   Created new user in supabase.
+-   Copied the Login User code and created a new file apiAuth.js inside services.
+-   Created new function login inside apiAuth.js and pasted the login code there.
+-   Created a new custom hook useLogin to actually login and handle errors using toast.
+
+Authorization:
+
+-   added the function getCurrentUser in the apiAuth.js.
+-   create useUser custom hook.
+-   Created <ProtectedRoute> component.
+-   Wrapped the <AppLayout> inside the ProtectedRoute to only navigate when the user is Logged in.
+-   Updated useLogin to pre-fetch the data and set the cache for the user.
+-   In <LoginForm>, cleared the inputs after the onSubmit is clicked (onSettled - means whether it was success or error)
+
+Logging out the user:
+
+-   created function logout in apiAuth.js
+-   created custom hook useLogout.
+-   created Logout.jsx
+-   called component <Logout> inside the <Header>

@@ -143,6 +143,9 @@ The reset function provided by useForm is not accessible in the custom hooks (di
             { onSuccess: () => reset() }
         );
         ```
+-   storing data in the query cache when the query is set before actually using the query data:
+    -   `queryClient.setQueryData(["user"], user);`
+    -   see useLogin.js
 
 Advantages of using custom hooks:
 
